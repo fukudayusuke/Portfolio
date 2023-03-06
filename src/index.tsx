@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Layout from 'Layout/layout';
 import reportWebVitals from './reportWebVitals';
-import { ProSidebarProvider } from 'react-pro-sidebar';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ProSidebarProvider>
-    <App />
-    </ProSidebarProvider>
+    {/* <App /> */}
+    <Layout/>
   </React.StrictMode>
 );
 
