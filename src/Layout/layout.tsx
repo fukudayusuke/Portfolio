@@ -2,6 +2,9 @@ import React from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
+import { BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -15,9 +18,11 @@ function Layout() {
     const Prosidebar = () => {
         return(
             <>
+                <BrowserRouter>
                 <ProSidebarProvider>
                     <Build_Sidebar/>
                 </ProSidebarProvider>
+                </BrowserRouter>
             </>
         );
     };
@@ -37,7 +42,10 @@ function Layout() {
 
         return (
             <div id="app" style={{ height: "100vh" ,  display: "flex" }}>
-              <Sidebar style={{ height: "100vh" }}>
+              <Sidebar image="https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg" 
+                       style={{ height: "100vh" }}
+                       backgroundColor="rgb(0, 249, 249, 0.7)"
+              >
                 <Menu>
                   <MenuItem
                     icon={<MenuOutlinedIcon />}
@@ -51,12 +59,12 @@ function Layout() {
                     <h2>Admin</h2>
                   </MenuItem>
         
-                  <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
-                  <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
-                  <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
-                  <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
-                  <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
-                  <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+                  <MenuItem component={<Link to="/1"/>} icon={<HomeOutlinedIcon />}>Home</MenuItem>
+                  <MenuItem component={<Link to="/2"/>} icon={<PeopleOutlinedIcon />}>Team</MenuItem>
+                  <MenuItem component={<Link to="/3"/>} icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
+                  <MenuItem component={<Link to="/4"/>} icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
+                  <MenuItem component={<Link to="/5"/>} icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
+                  <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
                 </Menu>
               </Sidebar>
               <main>
