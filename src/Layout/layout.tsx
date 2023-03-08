@@ -44,9 +44,18 @@ function Layout() {
             <div id="app" style={{ height: "100vh" ,  display: "flex" }}>
               <Sidebar image="https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg" 
                        style={{ height: "100vh" }}
-                       backgroundColor="rgb(0, 249, 249, 0.7)"
+                       backgroundColor="rgb(0, 249, 249, 0.1)"
               >
-                <Menu>
+                <Menu
+                menuItemStyles={{
+                  button: ({ level, active, disabled }) => {
+                    // only apply styles on first level elements of the tree
+                      return {
+                        color: "#000000",
+                      };
+                  }}
+                }
+                >
                   <MenuItem
                     icon={<MenuOutlinedIcon />}
                     onClick={() => {
