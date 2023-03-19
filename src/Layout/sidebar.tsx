@@ -17,30 +17,21 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 export const  SidebarPro = () => {
 
-    // Provider
-    const Prosidebar = () => {
-        return(
-            <>
-                <BrowserRouter>
-                <ProSidebarProvider>
-                    <Build_Sidebar/>
-                </ProSidebarProvider>
-                </BrowserRouter>
-            </>
-        );
-    };
-
     const Build_Sidebar = () => {
 
-          function Sidebar_Props() {
-            return {
-                image:"https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg" ,
-                // style:{{ height: "100vh" }},
-                backgroundColor:"rgb(0, 249, 249, 0.1)",
-            };
-          }
-          const props = Sidebar_Props();
-          
+        const SidebarProps = {
+            image: "https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg",
+            style: { height: "100vh" },
+            backgroundColor: "rgb(0, 249, 249, 0.3)",
+        };
+
+        const MenuProps = {
+            
+        }
+
+        const MenuItemProps = {
+            
+        }
 
         const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = useProSidebar();
             const toggle = () => {
@@ -60,7 +51,7 @@ export const  SidebarPro = () => {
                        style={{ height: "100vh" }}
                        backgroundColor="rgb(0, 249, 249, 0.1)"
               > */}
-                <Sidebar {...props}>
+                <Sidebar {...SidebarProps}>
                 <Menu
                 menuItemStyles={{
                   button: ({ level, active, disabled }) => {
@@ -109,6 +100,19 @@ export const  SidebarPro = () => {
             </>
           );
     }
+
+    // Provider
+    const Prosidebar = () => {
+        return(
+            <>
+                <BrowserRouter>
+                <ProSidebarProvider>
+                    <Build_Sidebar/>
+                </ProSidebarProvider>
+                </BrowserRouter>
+            </>
+        );
+    };
 
     return(
         <>
