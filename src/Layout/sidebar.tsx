@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { Key, ReactNode } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
@@ -39,7 +39,8 @@ export const  SidebarPro = () => {
          * Menu
          */
         const MenuProps = {
-            menuItemStyles: {
+            // menuItemStyles: {
+                menuitemstyles: {
                 // button: ({ level, active, disabled }) => {
                 button: ({  }) => {
                   // only apply styles on first level elements of the tree
@@ -77,9 +78,9 @@ export const  SidebarPro = () => {
          * @param icon 
          * @returns 
          */
-        function GenerateMenuItem(link: string, label: string, icon: React.ReactNode) {
+        function GenerateMenuItem(link: string, label: string, icon: React.ReactNode, keyindex? : Key) {
             return (
-              <MenuItem component={<Link to={link} />} icon={icon}>
+              <MenuItem component={<Link to={link} />} icon={icon} key={keyindex} >
                 {label}
               </MenuItem>
             );
@@ -88,7 +89,7 @@ export const  SidebarPro = () => {
         const GenerateMenuItemChildren = ( prop:Array<Menu_T> ) => {
             const newItems: JSX.Element[] = [];
             prop.forEach((item, index) => {
-              newItems.push(GenerateMenuItem(item.id, item.id, item.icon));
+              newItems.push(GenerateMenuItem(item.id, item.id, item.icon, item.id ));
             });
             return (
               <SubMenu>
@@ -103,7 +104,7 @@ export const  SidebarPro = () => {
                 if( item.children ) {
                     // GenerateMenuItemChildren( item.children );
                 } else {
-                    newItems.push( GenerateMenuItem( item.id, item.id, item.icon));
+                    newItems.push( GenerateMenuItem( item.id, item.id, item.icon, index ));
                 }
             });
             return newItems;
