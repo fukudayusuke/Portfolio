@@ -97,11 +97,11 @@ export const  SidebarPro = () => {
             );
           };
 
-        function MenuItemsFunction( table : any ) {
+        function MenuItemsFunction( table : Menu_T[] ) {
             const newItems: JSX.Element[] = [];
-            table.map((item:any, index:any) => {
+            table.map((item, index) => {
                 if( item.children ) {
-                    GenerateMenuItemChildren( item.children );
+                    // GenerateMenuItemChildren( item.children );
                 } else {
                     newItems.push( GenerateMenuItem( item.id, item.id, item.icon));
                 }
