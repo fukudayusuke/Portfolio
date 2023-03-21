@@ -5,9 +5,10 @@ import { Footer } from "./footer";
 
 export const Layout = () => (
     <>
+        {/* <div id="app" style={{ height: "100vh" ,  display: "flex-=" }}> */}
         <Header/>
         <MainContents />
-        {/* <MainContents /> */}
         <Footer/>
+        {/* </div> */}
     </>
 )

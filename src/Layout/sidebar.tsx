@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
@@ -13,26 +13,106 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
+import { Menu_T, MenuTBL } from 'GData/GData';
+import { MenuChildrenTBL } from 'GData/GData';
+
 // import styled from 'styled-components';
 
+/**
+ * 
+ * @returns 
+ */
 export const  SidebarPro = () => {
 
     const Build_Sidebar = () => {
 
+        /**
+         * Sidebar
+         */
         const SidebarProps = {
             image: "https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg",
             style: { height: "100vh" },
             backgroundColor: "rgb(0, 249, 249, 0.3)",
         };
 
+        /**
+         * Menu
+         */
         const MenuProps = {
-            
-        }
+            menuItemStyles: {
+                // button: ({ level, active, disabled }) => {
+                button: ({  }) => {
+                  // only apply styles on first level elements of the tree
+                  return {
+                    color: "#000000",
+                  };
+                },
+            },
+        };
 
+        /**
+         * MenuItem_Button
+         */
         const MenuItemProps = {
-            
+            icon: <MenuOutlinedIcon />,
+            onClick: () => {
+              //   collapseSidebar();
+              toggle();
+            },
+            style: { textAlign: "center" } as any,  // type change?
+        };
+
+        /**
+         * 
+         */
+        const MenuItemProps_item = {
+            component: <Link to="/1"/>,
+            icon: <HomeOutlinedIcon/>,
+        };
+
+        /**
+         *  MenuItems
+         * @param link 
+         * @param label 
+         * @param icon 
+         * @returns 
+         */
+        function GenerateMenuItem(link: string, label: string, icon: React.ReactNode) {
+            return (
+              <MenuItem component={<Link to={link} />} icon={icon}>
+                {label}
+              </MenuItem>
+            );
         }
 
+        const GenerateMenuItemChildren = ( prop:Array<Menu_T> ) => {
+            const newItems: JSX.Element[] = [];
+            prop.forEach((item, index) => {
+              newItems.push(GenerateMenuItem(item.id, item.id, item.icon));
+            });
+            return (
+              <SubMenu>
+                {newItems}
+              </SubMenu>
+            );
+          };
+
+        function MenuItemsFunction( table : any ) {
+            const newItems: JSX.Element[] = [];
+            table.map((item:any, index:any) => {
+                if( item.children ) {
+                    GenerateMenuItemChildren( item.children );
+                } else {
+                    newItems.push( GenerateMenuItem( item.id, item.id, item.icon));
+                }
+            });
+            return newItems;
+        };
+
+
+        /**
+         * Var
+         */
         const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = useProSidebar();
             const toggle = () => {
                 toggleSidebar();
@@ -45,42 +125,30 @@ export const  SidebarPro = () => {
             }
         };
 
+
         return (
             <>
-              {/* <Sidebar image="https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg" 
-                       style={{ height: "100vh" }}
-                       backgroundColor="rgb(0, 249, 249, 0.1)"
-              > */}
                 <Sidebar {...SidebarProps}>
-                <Menu
-                menuItemStyles={{
-                  button: ({ level, active, disabled }) => {
-                    // only apply styles on first level elements of the tree
-                      return {
-                        color: "#000000",
-                      };
-                  }}
-                }
-                >
-                  <MenuItem
-                    icon={<MenuOutlinedIcon />}
-                    onClick={() => {
-                    //   collapseSidebar();
-                        toggle();
-                    }}
-                    style={{ textAlign: "center" }}
-                  >
-                    {" "}
-                    <h2>Admin</h2>
-                  </MenuItem>
-        
-                  <MenuItem component={<Link to="/1"/>} icon={<HomeOutlinedIcon />}>Home</MenuItem>
-                  <MenuItem component={<Link to="/2"/>} icon={<PeopleOutlinedIcon />}>Team</MenuItem>
-                  <MenuItem component={<Link to="/3"/>} icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
-                  <MenuItem component={<Link to="/4"/>} icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
-                  <MenuItem component={<Link to="/5"/>} icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
-                  <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
-                </Menu>
+                    <Menu {...MenuProps}>
+                        <MenuItem {...MenuItemProps}>
+                        {" "}
+                        <h2>Admin</h2>
+                        </MenuItem>
+                        {/* {MenuTBL.map((item, index) => GenerateMenuItem( item.id, item.id, item.icon) ) } */}
+                        {MenuItemsFunction( MenuTBL )}
+                        {/* <MenuItem component={<Link to="/1"/>} icon={<HomeOutlinedIcon />}>Home</MenuItem> */}
+                        {/* {GenerateMenuItem("/1", "Home", <HomeOutlinedIcon />)} */}
+                        {/* <MenuItem component={<Link to="/2"/>} icon={<PeopleOutlinedIcon />} style={{height:100}}>Team</MenuItem> */}
+                        {/* <MenuItem component={<Link to="/3"/>} icon={<ContactsOutlinedIcon />}>Contacts</MenuItem> */}
+                        {/* <MenuItem component={<Link to="/4"/>} icon={<ReceiptOutlinedIcon />}>Profile</MenuItem> */}
+                        {/* <MenuItem component={<Link to="/5"/>} icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem> */}
+                        {/* <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem> */}
+                        <SubMenu {...MenuProps} label="Charts">
+                            <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+                            <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+                            <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+                        </SubMenu>
+                    </Menu>
               </Sidebar>
               <main>
               <h1
