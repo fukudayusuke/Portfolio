@@ -86,13 +86,13 @@ export const  SidebarPro = () => {
             );
         }
 
-        const GenerateMenuItemChildren = ( prop:Array<Menu_T> ) => {
+        const GenerateMenuItemChildren = ( id: string , icon: React.ReactNode, table: Menu_T ) => {
             const newItems: JSX.Element[] = [];
-            prop.forEach((item, index) => {
-              newItems.push(GenerateMenuItem(item.id, item.id, item.icon, item.id ));
+            table.map((item, index) => {
+              newItems.push(GenerateMenuItem(item.id, item.id, item.icon, index ));
             });
             return (
-              <SubMenu>
+              <SubMenu label={id} icon={icon} >
                 {newItems}
               </SubMenu>
             );
@@ -102,7 +102,7 @@ export const  SidebarPro = () => {
             const newItems: JSX.Element[] = [];
             table.map((item, index) => {
                 if( item.children ) {
-                    // GenerateMenuItemChildren( item.children );
+                  newItems.push( GenerateMenuItemChildren( item.id, item.icon, item.children ) );
                 } else {
                     newItems.push( GenerateMenuItem( item.id, item.id, item.icon, index ));
                 }
@@ -144,11 +144,11 @@ export const  SidebarPro = () => {
                         {/* <MenuItem component={<Link to="/4"/>} icon={<ReceiptOutlinedIcon />}>Profile</MenuItem> */}
                         {/* <MenuItem component={<Link to="/5"/>} icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem> */}
                         {/* <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem> */}
-                        <SubMenu {...MenuProps} label="Charts">
+                        {/* <SubMenu {...MenuProps} label="Charts">
                             <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
                             <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
                             <MenuItem component={<Link to="/6"/>} icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
-                        </SubMenu>
+                        </SubMenu> */}
                     </Menu>
               </Sidebar>
               <main>
