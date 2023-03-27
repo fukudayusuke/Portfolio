@@ -22,7 +22,7 @@ export interface Menu_T {
     icon? : React.ReactNode
     style?: Style
     url:string
-    children? : Menu_T | Menu_T[] | null
+    childrenTBL? : Menu_T | Menu_T[] | null
     functoinTBL: Function | Function[] | null
 }
 
@@ -101,7 +101,7 @@ export const MenuTBL : Menu_T[] = [
         id: "Function4",
         icon : <ReceiptOutlinedIcon />,
         url: "Function4",
-        children: MenuChildrenTBL,
+        childrenTBL: MenuChildrenTBL,
         functoinTBL: FunctionTBL
     }
 ]

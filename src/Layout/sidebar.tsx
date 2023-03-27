@@ -13,8 +13,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
-import { Menu_T, MenuTBL } from 'GData/GData';
-import { MenuChildrenTBL } from 'GData/GData';
+import { Menu_T, MenuTBL , MenuChildrenTBL } from 'GData/GData';
 
 // import styled from 'styled-components';
 
@@ -86,13 +85,13 @@ export const  SidebarPro = () => {
             );
         }
 
-        const GenerateMenuItemChildren = ( id: string , icon: React.ReactNode, table: Menu_T ) => {
+        const GenerateMenuItemChildren = ( id: string , icon: React.ReactNode, table: Menu_T[], keyindex? : Key ) => {
             const newItems: JSX.Element[] = [];
             table.map((item, index) => {
               newItems.push(GenerateMenuItem(item.id, item.id, item.icon, index ));
             });
             return (
-              <SubMenu label={id} icon={icon} >
+              <SubMenu label={id} icon={icon} key={keyindex} >
                 {newItems}
               </SubMenu>
             );
@@ -101,8 +100,8 @@ export const  SidebarPro = () => {
         function MenuItemsFunction( table : Menu_T[] ) {
             const newItems: JSX.Element[] = [];
             table.map((item, index) => {
-                if( item.children ) {
-                  newItems.push( GenerateMenuItemChildren( item.id, item.icon, item.children ) );
+                if( item.childrenTBL ) {
+                  newItems.push( GenerateMenuItemChildren( item.id, item.icon, (item.childrenTBL as Menu_T[]), index ));
                 } else {
                     newItems.push( GenerateMenuItem( item.id, item.id, item.icon, index ));
                 }
